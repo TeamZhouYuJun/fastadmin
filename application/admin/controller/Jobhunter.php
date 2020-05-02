@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\admin\behavior\ApiapiLog;
 use app\admin\model\AuthGroup;
 use app\common\controller\Backend;
 use fast\Random;
@@ -56,7 +57,6 @@ class Jobhunter extends Backend
                 $v->hidden(['password', 'salt']);
             }
             $result = array("total" => $total, "rows" => $list);
-
             return json($result);
         }
         return $this->view->fetch();
@@ -69,7 +69,10 @@ class Jobhunter extends Backend
         if ($params) {
 
            $data=$params;
-           $this->model->saveAll($data);
+           //dump($data);die;
+
+            $this->model->save($data);
+            $this->success();
         }
         $this->error();
         }

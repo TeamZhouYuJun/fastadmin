@@ -1,6 +1,6 @@
 <?php
 
-namespace app\apiapi\behavior;
+namespace app\admin\behavior;
 
 class ApiapiLog
 {
