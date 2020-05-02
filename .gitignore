@@ -1,5 +1,4 @@
 /nbproject/
-/thinkphp/
 /vendor/
 /runtime/*
 /application/admin/command/Install/*.lock
