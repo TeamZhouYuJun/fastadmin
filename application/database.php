@@ -23,9 +23,9 @@ return [
     // 用户名
     'username'        => Env::get('database.username', 'root'),
     // 密码
-    'password'        => Env::get('database.password', 'root'),
+    'password'        => Env::get('database.password', 'liao123456'),
     // 端口
-    'hostport'        => Env::get('database.hostport', '3306'),
+    'hostport'        => Env::get('database.hostport', '33061'),
     // 连接dsn
     'dsn'             => '',
     // 数据库连接参数
