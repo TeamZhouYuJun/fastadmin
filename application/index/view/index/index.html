@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>{$site.name}</title>
+        <title>人才大厅</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -27,40 +27,53 @@
     </head>
 
     <body id="page-top">
-
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
                         <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>
+                    <!--<a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>-->
                 </div>
-
                 <div class="collapse navbar-collapse" id="navbar-collapse-menu">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{:url('/')}" target="_blank">{:__('Home')}</a></li>
-                        <li><a href="{:url('index/user/index')}" target="_blank">{:__('Member center')}</a></li>
+                        <li><a href="{:url('/')}">{:__('Home')}</a></li>
+                        <li><a href="{:url('index/user/index')}">人才中心</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container-fluid -->
         </nav>
-
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="header-content">
-                            <div class="header-content-inner">
-                                <h1>{$site.name}</h1>
+        <!--<p style="width: 100%; margin-top: 70px;text-align: center;">FastJob</p>-->
+        <div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
+            <div class="col-xs-7">
+                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="" id="" value="" />
+            </div>
+            <div class="col-xs-5">
+                <select class="input-xs">
+                    <option value ="full_name">姓名</option>
+                    <option value ="phone">电话</option>
+                    <option value="profession">工种</option>
+                    <option value="profession_level">等级</option>
+                    <option value="graduate_school">毕业学校</option>
+                </select>
+                <button type="button" class="btn btn-default btn-xs active">搜索</button>
+            </div>
+        </div>
+        <div class="job">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul>
+                        <li>
+                            <div class="header-content" style="padding: 10px;">
+                                <p class="text-left">姓名：张全蛋</p>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </header>
+        </div>
 
         <!-- jQuery -->
         <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>

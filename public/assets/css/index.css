@@ -100,10 +100,18 @@ p {
         color: white;
     }
 }
+.job {
+    /*position: relative;*/
+    margin-top: 20px;
+    text-align: center;
+    overflow: hidden;
+    height: 100px;
+    background: #00caff;
+}
 header {
     position: relative;
     width: 100%;
-    min-height: auto;
+    /*min-height: auto;*/
     overflow-y: hidden;
     background: url("../img/bg-pattern.png"), #247cdc;
     /* fallback for old browsers */
@@ -143,7 +151,7 @@ header .device-container .screen img {
 }
 @media (min-width: 768px) {
     header {
-        min-height: 100%;
+        /*min-height: 100%;*/
     }
     header .header-content {
         text-align: center;

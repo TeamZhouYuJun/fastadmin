@@ -12,7 +12,7 @@ class Index extends BaseController
      */
     public function index()
     {
-
+var_dump(66);die;
         return $this->view->fetch();
     }
 
