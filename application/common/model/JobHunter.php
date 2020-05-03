@@ -5,7 +5,7 @@ namespace app\common\model;
 use think\Model;
 
 /**
- * 会员模型
+ * 人才模型
  */
 class JobHunter extends Model
 {
@@ -15,6 +15,13 @@ class JobHunter extends Model
     // 定义时间戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
+
+    private $gender=[0 =>'女',1=>'男'];
+
+    public function GetGenderAttr($value)
+    {
+       return $this->gender[$value];
+    }
 
 
 }

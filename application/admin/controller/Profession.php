@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\admin\behavior\ApiapiLog;
 use app\admin\model\AuthGroup;
 use app\common\controller\Backend;
+use app\common\model\ProfessionSetting;
 use fast\Random;
 use fast\Tree;
 use think\Db;
@@ -17,7 +18,7 @@ use think\Validate;
  * @icon fa fa-group
  * @remark 角色组可以有多个,角色有上下级层级关系,如果子角色有角色组和管理员的权限则可以派生属于自己组别下级的角色组或管理员
  */
-class Jobhunter extends Backend
+class Profession extends Backend
 {
 
     protected $relationSearch = true;
@@ -25,7 +26,7 @@ class Jobhunter extends Backend
     public function _initialize()
     {
         parent::_initialize();
-        $this->model = model('JobHunter');
+        $this->model = new ProfessionSetting();
     }
 
     /**
@@ -53,7 +54,9 @@ class Jobhunter extends Backend
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
-            //dump($list);die;
+            foreach ($list as $k => $v) {
+                $v->hidden(['password', 'salt']);
+            }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }
@@ -63,50 +66,43 @@ class Jobhunter extends Backend
     public function add()
     {
         if ($this->request->isPost()) {
-            $params = $this->request->post("row/a");
-            if ($params) {
-                $data=$params;
-                //dump($data);die;
-                // 调用当前模型对应的User验证器类进行数据验证
-                $result = $this->model->validate('JobhunterValidate')->save($data);
-                if(false === $result){
-                    // 验证失败 输出错误信息
-                    $this->error($this->model->getError());
-                }
-                $this->success();
-            }
+        $params = $this->request->post("row/a");
+        if ($params) {
+
+           $data=$params;
+           //dump($data);die;
+
+            $this->model->save($data);
+            $this->success();
+        }
         $this->error();
         }
-        $professions=model('ProfessionSetting')->professionList();
-        $professionLevels=model('ProfessionSetting')->professionLevelList();
-        $this->assign('professions',$professions);
-        $this->assign('levels',$professionLevels);
+        //$this->assign('')
         return $this->view->fetch();
     }
 
 
-    public function edit($ids = null)
+
+    public function edit($ids = NULL)
     {
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
-            //dump($data);die;
-            // 调用当前模型对应的User验证器类进行数据验证
-            $result = $this->model->validate('JobhunterValidate')->Update($params);
-            if(false === $result){
-                // 验证失败 输出错误信息
-                $this->error($this->model->getError());
+            if ($params) {
+                $data=$params;
+                //验证
+                //dump($data);die;
+                $this->model->isUpdate()->save($data);
+                $this->success();
             }
-            $this->success();
+            $this->error();
         }
-        $row=$this->model->find($ids);
-        //dump($row);die;
-        $professions=model('ProfessionSetting')->professionList();
-        $professionLevels=model('ProfessionSetting')->professionLevelList();
+
+        $row=$this->model->find(intval($ids));
         $this->assign('row',$row);
-        $this->assign('professions',$professions);
-        $this->assign('levels',$professionLevels);
         return $this->view->fetch();
     }
 
-
+    public function test(){
+        $this->model->professionList();
+    }
 }

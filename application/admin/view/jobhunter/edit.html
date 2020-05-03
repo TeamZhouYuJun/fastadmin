@@ -1,45 +1,56 @@
 <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
-
-    <div class="form-group">
-        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('姓名')}:</label>
+    <div class="form-group hidden">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('id')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-name" class="form-control" name="row[full_name]" type="text" data-placeholder-node="{:__('Node tips')}" data-placeholder-menu="{:__('Menu tips')}">
+            <input id="c-id" class="form-control" name="row[id]" value="{:$row['id']}" type="text" data-placeholder-node="{:__('Node tips')}" data-placeholder-menu="{:__('Menu tips')}">
         </div>
     </div>
     <div class="form-group">
-        <label for="c-title" class="control-label col-xs-12 col-sm-2">{:__('年龄')}:</label>
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('姓名')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-title" class="form-control" name="row[age]" type="text" value="">
+            <input id="c-name" class="form-control" name="row[full_name]" value="{:$row['full_name']}" type="text" data-placeholder-node="{:__('Node tips')}" data-placeholder-menu="{:__('Menu tips')}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-age" class="control-label col-xs-12 col-sm-2">{:__('年龄')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-age" class="form-control" name="row[age]" type="text" value="{:$row['age']}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-phone" class="control-label col-xs-12 col-sm-2">{:__('手机')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-phone" class="form-control" name="row[phone]" type="text" value="{:$row['phone']}">
         </div>
     </div>
     <div class="form-group">
         <label  class="control-label col-xs-12 col-sm-2">{:__('性别')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_select('row[gender]', ['0'=>'女','1'=>'男'], 1, ['class'=>'form-control', 'required'=>''])}
+            {:build_select('row[gender]', ['0'=>'女','1'=>'男'], $row->getData('gender'), ['class'=>'form-control', 'required'=>''])}
         </div>
     </div>
     <div class="form-group">
         <label for="c-weigh" class="control-label col-xs-12 col-sm-2">{:__('毕业学校')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-weigh" class="form-control" name="row[graduate_school]" type="number" value="0">
+            <input id="c-weigh" class="form-control" name="row[graduate_school]" type="text" value="{:$row['graduate_school']}">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('工种')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-profession" class="form-control" name="row[profession]" type="number" value="0">
+            {:build_select('row[profession]', $professions, $row['profession'], ['class'=>'form-control', 'required'=>''])}
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('工种等级')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_select('row[profession_level]', ['0'=>'女','1'=>'男'], null, ['class'=>'form-control', 'required'=>''])}
+            {:build_select('row[profession_level]', $levels, null, ['class'=>'form-control', 'required'=>''])}
         </div>
     </div>
     <div class="form-group">
         <label for="c-resume" class="control-label col-xs-12 col-sm-2">{:__('成长履历')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <textarea name="row[resume]" id="c-resume" cols="60" rows="5" class="form-control editor"></textarea>
+            <textarea name="row[resume]" id="c-resume"  cols="60" rows="5" class="form-control editor">{:$row['resume']}</textarea>
         </div>
     </div>
     <div class="form-group layer-footer">

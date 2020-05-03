@@ -55,6 +55,7 @@ class Adminlog extends Backend
                     ->order($sort, $order)
                     ->limit($offset, $limit)
                     ->select();
+            ///dump($list);die;
             $result = array("total" => $total, "rows" => $list);
 
             return json($result);
