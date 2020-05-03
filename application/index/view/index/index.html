@@ -14,6 +14,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+        <link href="__CDN__/assets/layer/mobile/need/layer.css" rel="stylesheet">
 
         <!-- Plugin CSS -->
         <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -66,12 +67,12 @@
             <ul class="list-unstyled">
                 {if condition="!empty($list)"}
                 {volist name="list" id="vo"}
-                    <li class="job-list">
+                    <li class="job-list" detail-id="{$vo.id}">
                         <div  style="padding: 10px;">
                             <p class="text-left">姓名：{$vo.full_name}</p>
                             <p class="text-left">工种：{$vo.profession}</p>
                             <p class="text-left">毕业学校：{$vo.graduate_school}</p>
-                            <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                            <p class="text-left">{$vo.resume}</p>
                         </div>
                     </li>
                 {/volist}
@@ -81,11 +82,15 @@
 
         <!-- jQuery -->
         <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+        <script src="__CDN__/assets/layer/layer.js"></script>
         <script>
             function search(){
                 var search_type = document.getElementById("search_type").value;
                 var search_value = document.getElementById("search_value").value;
-
+                if (typeof(search_value)=="undefined" || search_value=='' || search_value==null){
+                    layer.msg("请输入搜索内容！");
+                    return false;
+                }
                 var url = window.location.href; //url路径
 
                 var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
@@ -96,6 +101,17 @@
                 window.location.href = goUrl;
             }
 
+            $(".job-list").click(function(){
+                var detail_id = $(this).attr("detail-id");
+
+                var url = window.location.href; //url路径
+
+                //地址拼接;
+                var goUrl = url + 'index/index/detail?detail_id=' + detail_id;
+
+                //跳转路径
+                window.location.href = goUrl;
+            });
 
         </script>
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>人才详情</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">
+        <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+
+        <!-- Plugin CSS -->
+        <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body id="page-top">
+        <a href="javascript:history.back(-1)" class="btn btn-default btn-lg active" role="button">返回</a>
+        <div class="row">
+            <h1>{$data.full_name}</h1>
+            {if condition="$data['gender'] == 1"}
+                <h2>男</h2>
+            {else /}
+                <h2>女</h2>
+            {/if}
+            <h2>{$data.age}岁</h2>
+            <h2>电话：{$data.phone}</h2>
+            <h2>工种：{$data.profession}</h2>
+            <h2>毕业学校：{$data.graduate_school}</h2>
+            <div>
+                <h2>成长履历</h2>
+                {$data.resume}
+            </div>
+        </div>
+
+
+        <!-- jQuery -->
+        <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+        <script>
+            function search(){
+                var search_type = document.getElementById("search_type").value;
+                var search_value = document.getElementById("search_value").value;
+
+                var url = window.location.href; //url路径
+
+                var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+                //地址拼接;
+                var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
+
+                //跳转路径
+                window.location.href = goUrl;
+            }
+
+            $(".job-list").click(function(){
+                var detail_id = $(this).attr("detail-id");
+
+                var url = window.location.href; //url路径
+
+                //地址拼接;
+                var goUrl = url + 'detail?detail_id=' + detail_id;
+
+                //跳转路径
+                window.location.href = goUrl;
+            });
+
+        </script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
