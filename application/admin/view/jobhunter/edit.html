@@ -38,13 +38,13 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('工种')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_select('row[profession]', $professions, $row['profession'], ['class'=>'form-control', 'required'=>''])}
+            {:build_select('row[profession_id]', $professions, $row['profession_id'], ['class'=>'form-control', 'required'=>''])}
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('工种等级')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_select('row[profession_level]', $levels, null, ['class'=>'form-control', 'required'=>''])}
+            {:build_select('row[profession_level_id]', $levels, $row['profession_level_id'], ['class'=>'form-control', 'required'=>''])}
         </div>
     </div>
     <div class="form-group">
