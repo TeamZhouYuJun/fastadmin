@@ -101,12 +101,15 @@ p {
     }
 }
 .job {
-    /*position: relative;*/
     margin-top: 20px;
     text-align: center;
     overflow: hidden;
-    height: 100px;
-    background: #00caff;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.job ul .job-list{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #c5c9cf;
 }
 header {
     position: relative;

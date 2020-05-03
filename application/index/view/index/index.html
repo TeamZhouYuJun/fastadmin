@@ -45,38 +45,93 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <!--<p style="width: 100%; margin-top: 70px;text-align: center;">FastJob</p>-->
+
         <div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
             <div class="col-xs-7">
-                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="" id="" value="" />
+                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value" value="" />
             </div>
             <div class="col-xs-5">
-                <select class="input-xs">
+                <select id="search_type" class="input-xs">
                     <option value ="full_name">姓名</option>
                     <option value ="phone">电话</option>
                     <option value="profession">工种</option>
                     <option value="profession_level">等级</option>
                     <option value="graduate_school">毕业学校</option>
                 </select>
-                <button type="button" class="btn btn-default btn-xs active">搜索</button>
+                <button type="button" onclick="search()" class="btn btn-default btn-xs active">搜索</button>
             </div>
         </div>
+
         <div class="job">
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul>
-                        <li>
-                            <div class="header-content" style="padding: 10px;">
-                                <p class="text-left">姓名：张全蛋</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <ul class="list-unstyled">
+                <li class="job-list">
+                    <div  style="padding: 10px;">
+                        <p class="text-left">姓名：张全蛋</p>
+                        <p class="text-left">工种：程序员</p>
+                        <p class="text-left">毕业学校：清华大学</p>
+                        <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                    </div>
+                </li>
+                <li class="job-list">
+                    <div style="padding: 10px; ">
+                        <p class="text-left">姓名：张全蛋</p>
+                        <p class="text-left">工种：程序员</p>
+                        <p class="text-left">毕业学校：清华大学</p>
+                        <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                    </div>
+                </li>
+                <li class="job-list">
+                    <div style="padding: 10px; ">
+                        <p class="text-left">姓名：张全蛋</p>
+                        <p class="text-left">工种：程序员</p>
+                        <p class="text-left">毕业学校：清华大学</p>
+                        <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                    </div>
+                </li>
+                <li class="job-list">
+                    <div style="padding: 10px; ">
+                        <p class="text-left">姓名：张全蛋</p>
+                        <p class="text-left">工种：程序员</p>
+                        <p class="text-left">毕业学校：清华大学</p>
+                        <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                    </div>
+                </li>
+                <li class="job-list">
+                    <div style="padding: 10px; ">
+                        <p class="text-left">姓名：张全蛋</p>
+                        <p class="text-left">工种：程序员</p>
+                        <p class="text-left">毕业学校：清华大学</p>
+                        <p class="text-left">简历缩略简历缩略简历缩略简历缩略</p>
+                    </div>
+                </li>
+
+            </ul>
         </div>
 
         <!-- jQuery -->
         <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+        <script>
+            function search(){
+                var search_type = document.getElementById("search_type").value;
+                var search_value = document.getElementById("search_value").value;
+                alert(search_value);
+                gotoUrl(search_type,search_value);
+
+            }
+
+            //搜索拼接地址
+            function gotoUrl(search_type,search_value) {
+                var url = window.location.href; //url路径
+
+                var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+
+                //地址拼接;
+                var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
+                //跳转路径
+                window.location.href = goUrl;
+            }
+
+        </script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
