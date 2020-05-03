@@ -33,7 +33,6 @@ class Addon extends Backend
      */
     public function index()
     {
-        echo 888;die;
         $addons = get_addon_list();
         foreach ($addons as $k => &$v) {
             $config = get_addon_config($v['name']);

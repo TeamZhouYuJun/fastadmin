@@ -1,19 +1,14 @@
 <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
     <div class="form-group">
-        <div class="col-xs-12 col-sm-8 hidden">
-            <input id="c-id" class="form-control" name="row[id]" type="text" value="{:$row['id']}">
-        </div>
-    </div>
-    <div class="form-group">
         <label for="c-name" class="control-label col-xs-12 col-sm-2">{:__('工种名称')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-name" class="form-control" name="row[name]" type="text" value="{:$row['name']}" data-placeholder-node="{:__('Node tips')}" data-placeholder-menu="{:__('Menu tips')}">
+            <input id="c-name" class="form-control" name="row[name]" type="text" value="" data-placeholder-node="{:__('Node tips')}" data-placeholder-menu="{:__('Menu tips')}">
         </div>
     </div>
     <div class="form-group">
-        <label for="c-age" class="control-label col-xs-12 col-sm-2">{:__('工种简述')}:</label>
+        <label for="c-age" class="control-label col-xs-12 col-sm-2">{:__('工种简介')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-age" class="form-control" name="row[summary]" type="text" value="{:$row['summary']}">
+            <input id="c-age" class="form-control" name="row[summary]" type="text" value="">
         </div>
     </div>
     <div class="form-group layer-footer">

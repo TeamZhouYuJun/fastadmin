@@ -5,10 +5,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: 'profession/index',
-                    edit_url: 'profession/edit',
-                    add_url: 'profession/add',
-                    table: 'profession',
+                    index_url: 'professionlevel/index',
+                    edit_url: 'professionlevel/edit',
+                    add_url: 'professionlevel/add',
+                    table: 'professionlevel',
                 }
             });
 
@@ -23,8 +23,9 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {checkbox: true},
                         {field: 'id', title: __('Id'), sortable: true},
-                        {field: 'name', title: __('工种')},
-                        {field: 'summary', title: __('工种简述')},
+                        {field: 'name', title: __('工种等级名称')},
+                        {field: 'professionName', title: __('所属工种')},
+                        {field: 'summary', title: __('工种等级简述')},
                         {field: 'createtime', title: __('创建时间'),formatter: Table.api.formatter.datetime},
                         {field: 'updatetime', title: __('更新时间'),formatter: Table.api.formatter.datetime},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
