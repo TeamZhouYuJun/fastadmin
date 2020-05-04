@@ -168,7 +168,11 @@ if (!function_exists('build_heading')) {
      * 生成页面Heading
      *
      * @param string $path 指定的path
+     * @param bool $container
      * @return string
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
      */
     function build_heading($path = null, $container = true)
     {

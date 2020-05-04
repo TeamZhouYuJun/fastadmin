@@ -524,4 +524,18 @@ class Backend extends Controller
         //刷新Token
         $this->request->token();
     }
+
+    public function  del($ids = "")
+    {
+        //分割  id 到数组
+        $idsArr=explode(',',$ids);
+
+        if (is_array($idsArr) && intval($idsArr[0]) > 0){
+            //dump($ids);die;
+
+            $this->model->whereIn('id',$ids)->delete();
+            $this->success();
+        }
+         $this->error("参数 ids 错误");
+    }
 }

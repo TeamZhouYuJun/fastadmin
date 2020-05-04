@@ -104,10 +104,10 @@
             $(".job-list").click(function(){
                 var detail_id = $(this).attr("detail-id");
 
-                var url = window.location.href; //url路径
+                //var url = window.location.href; //url路径
 
                 //地址拼接;
-                var goUrl = url + 'index/index/detail?detail_id=' + detail_id;
+                var goUrl = /*url +*/ '/index/index/detail?detail_id=' + detail_id;
 
                 //跳转路径
                 window.location.href = goUrl;

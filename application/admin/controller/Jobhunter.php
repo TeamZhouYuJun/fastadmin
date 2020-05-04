@@ -36,17 +36,9 @@ class Jobhunter extends Backend
         //设置过滤方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
-            //dump($this->model);
-            //如果发送的来源是Selectpage，则转发到Selectpage
-            if ($this->request->request('keyField')) {
-                return $this->selectpage();
-            }
-
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-
             $total = $this->model
                 ->where($where)
-                ->order($sort, $order)
                 ->count();
             $list = $this->model
                 ->with('profession')            //关联工种
@@ -56,11 +48,15 @@ class Jobhunter extends Backend
                 ->limit($offset, $limit)
                 ->select();
             $list = collection((array)$list)->toArray();
-
-
+            foreach ($list as $index =>&$item){
+                $item['profession_id'] = $item['profession']['name'];    //为了前端页面的头部搜索   覆盖 到 提交的字段 `profession_id`
+                $item['profession_level_id'] = $item['profession_level']['name'];  //为了前端页面的头部搜索   覆盖 到 提交的字段 `profession_level_id`
+            }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }
+        $this->assign("professions",json_encode( model('Profession')->getSelectList()));
+        $this->assign("professionLevels",json_encode( model('ProfessionLevel')->getSelectList()));
         return $this->view->fetch();
     }
 
@@ -82,7 +78,7 @@ class Jobhunter extends Backend
         $this->error();
         }
         $professions=model('Profession')->getSelectList();
-        $professionLevels=['-1' =>'请先选择工种'];
+        $professionLevels=model('ProfessionLevel')->getSelectList();
         $this->assign('professions',$professions);
         $this->assign('levels',$professionLevels);
         return $this->view->fetch();
@@ -111,6 +107,8 @@ class Jobhunter extends Backend
         $this->assign('levels',$professionLevels);
         return $this->view->fetch();
     }
+
+
 
 
 }
