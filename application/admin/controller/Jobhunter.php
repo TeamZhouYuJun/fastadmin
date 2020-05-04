@@ -77,8 +77,8 @@ class Jobhunter extends Backend
             }
         $this->error();
         }
-        $professions=model('ProfessionSetting')->professionList();
-        $professionLevels=model('ProfessionSetting')->professionLevelList();
+        $professions=model('Profession')->getSelectList();
+        $professionLevels=['-1' =>'请先选择工种'];
         $this->assign('professions',$professions);
         $this->assign('levels',$professionLevels);
         return $this->view->fetch();
@@ -100,8 +100,8 @@ class Jobhunter extends Backend
         }
         $row=$this->model->find($ids);
         //dump($row);die;
-        $professions=model('ProfessionSetting')->professionList();
-        $professionLevels=model('ProfessionSetting')->professionLevelList();
+        $professions=model('Profession')->getSelectList();
+        $professionLevels=model('ProfessionLevel')->getSelectList();
         $this->assign('row',$row);
         $this->assign('professions',$professions);
         $this->assign('levels',$professionLevels);

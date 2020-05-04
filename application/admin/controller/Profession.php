@@ -26,7 +26,7 @@ class Profession extends Backend
     public function _initialize()
     {
         parent::_initialize();
-        $this->model = model('ProfessionModel');
+        $this->model = model('Profession');
     }
 
     /**
