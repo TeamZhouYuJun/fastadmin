@@ -40,7 +40,6 @@ class Professionlevel extends Backend
             //dump($this->model);die;
             //如果发送的来源是Selectpage，则转发到Selectpage
             if ($this->request->request('keyField')) {
-                //echo 8888;die;
                 return $this->selectpage();
             }
 
@@ -51,15 +50,15 @@ class Professionlevel extends Backend
                 //->order($sort, $order)
                 ->count();
             $list = $this->model
-                ::with('profession')
+                //::with('profession')
                 ->where($where)
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
             //dump($list[0]->toArray());die;
-            foreach ($list as &$item){
+            /*foreach ($list as &$item){
                 $item->professionName=$item->profession->name;
-            }
+            }*/
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }

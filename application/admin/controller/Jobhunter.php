@@ -49,11 +49,15 @@ class Jobhunter extends Backend
                 ->order($sort, $order)
                 ->count();
             $list = $this->model
+                ->with('profession')            //关联工种
+                ->with("professionLevel")       //关联工种等级
                 ->where($where)
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
-            //dump($list);die;
+            $list = collection((array)$list)->toArray();
+
+
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }

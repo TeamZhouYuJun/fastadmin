@@ -56,9 +56,6 @@ class Profession extends Backend
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
-            foreach ($list as $k => $v) {
-                $v->hidden(['password', 'salt']);
-            }
             $result = array("total" => $total, "rows" => $list);
             return json($result);
         }

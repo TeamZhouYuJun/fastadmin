@@ -23,5 +23,17 @@ class JobHunter extends Model
        return $this->gender[$value];
     }
 
+    public function profession()
+    {
+        //dump($this->belongsTo('Profession','profession_id'));die;
+        return $this->belongsTo('Profession','profession_id');
+    }
+
+    public function professionLevel()
+    {
+        //dump($this->belongsTo('Profession','profession_id'));die;
+        return $this->belongsTo('ProfessionLevel','profession_level_id');
+    }
+
 
 }

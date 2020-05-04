@@ -24,7 +24,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {checkbox: true},
                         {field: 'id', title: __('Id'), sortable: true},
                         {field: 'name', title: __('工种等级名称')},
-                        {field: 'professionName', title: __('所属工种')},
+                        /* {field: 'professionName', title: __('所属工种')},*/
                         {field: 'summary', title: __('工种等级简述')},
                         {field: 'createtime', title: __('创建时间'),formatter: Table.api.formatter.datetime},
                         {field: 'updatetime', title: __('更新时间'),formatter: Table.api.formatter.datetime},
