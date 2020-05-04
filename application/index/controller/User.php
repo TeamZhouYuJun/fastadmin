@@ -246,6 +246,14 @@ class User extends Frontend
             ->where('j.user_id',$user['id'])
             ->find();
         $this->view->assign('job_hunter',$job_hunter);
+
+        //工种信息
+        $profession = Db::table('fa_profession')->select();
+        $this->view->assign('profession',$profession);
+
+        //工种等级信息
+        $level = Db::table('fa_profession_level')->select();
+        $this->view->assign('level',$level);
         return $this->view->fetch();
     }
 

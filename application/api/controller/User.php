@@ -3,6 +3,7 @@
 namespace app\api\controller;
 
 use app\common\controller\Api;
+use think\Db;
 use app\common\library\Ems;
 use app\common\library\Sms;
 use fast\Random;
@@ -162,6 +163,51 @@ class User extends Api
         $user->bio = $bio;
         $user->avatar = $avatar;
         $user->save();
+
+        //开启事务,避免出现垃圾数据
+        Db::startTrans();
+        $job_hunter = Db::table('fa_job_hunter')->where('user_id',$this->auth->id)->find();
+        if ($job_hunter) {
+            $update_data = [
+                'username'=> $user->username,
+                'full_name'=> $this->request->request('fullname'),
+                'age'=> $this->request->request('age'),
+                'phone'=> $this->auth->mobile,
+                'gender'=> $this->request->request('gender'),
+                'graduate_school'=> $this->request->request('graduate_school'),
+                'profession_id'=> $this->request->request('profession'),
+                'profession_level_id'=> $this->request->request('profession_level'),
+                'resume'=> $this->request->request('resume'),
+                'updatetime'=> time(),
+            ];
+            $update = Db::table('fa_job_hunter')->where('user_id', $this->auth->id)->update($update_data);
+            if (!$update) {
+                Db::rollback();
+                $this->error('编辑资料失败');
+            }
+        }else{
+            $insert_data = [
+                'user_id'=> $this->auth->id,
+                'username'=> $user->username,
+                'full_name'=> $this->request->request('fullname'),
+                'age'=> $this->request->request('age'),
+                'phone'=> $this->auth->mobile,
+                'gender'=> $this->request->request('gender'),
+                'graduate_school'=> $this->request->request('graduate_school'),
+                'profession_id'=> $this->request->request('profession'),
+                'profession_level_id'=> $this->request->request('profession_level'),
+                'resume'=> $this->request->request('resume'),
+                'createtime'=> time(),
+                'updatetime'=> time(),
+            ];
+            $insert = Db::table('fa_job_hunter')->insert($insert_data);
+            if (!$insert) {
+                Db::rollback();
+                $this->error('编辑资料失败');
+            }
+        }
+
+        Db::commit();
         $this->success();
     }
 
