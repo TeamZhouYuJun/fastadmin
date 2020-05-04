@@ -92,6 +92,57 @@
 
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">真实姓名:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="fullname" name="fullname" value="{$job_hunter.full_name|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">年龄:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="age" name="age" value="{$job_hunter.age|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">性别:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="layui-input-block">
+                                    {if condition="$job_hunter['gender'] == 1"}
+                                        <input type="radio" name="gender" value="1" title="男" checked>男
+                                        <input type="radio" name="gender" value="0" title="女" >女
+                                    {else /}
+                                        <input type="radio" name="gender" value="1" title="男">男
+                                        <input type="radio" name="gender" value="0" title="女" checked>女
+                                    {/if}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">毕业院校:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="graduate_school" name="graduate_school" value="{$job_hunter.graduate_school|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">工种:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="profession" name="profession" value="{$job_hunter.profession|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">工种等级:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control" id="profession_level" name="profession_level" value="{$job_hunter.profession_level|htmlentities}" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-2">履历:</label>
+                            <div class="col-xs-12 col-sm-4">
+                                <textarea class="form-control" rows="8" name="resume">{$job_hunter.resume}</textarea>
+                            </div>
+                        </div>
+
                         <div class="form-group normal-footer">
                             <label class="control-label col-xs-12 col-sm-2"></label>
                             <div class="col-xs-12 col-sm-8">

@@ -11,6 +11,7 @@ use think\Cookie;
 use think\Hook;
 use think\Session;
 use think\Validate;
+use think\Db;
 
 /**
  * 会员中心
@@ -70,6 +71,17 @@ class User extends Frontend
     public function index()
     {
         $this->view->assign('title', __('User center'));
+        $user = $this->auth->getUser();
+        //人才信息
+        $job_hunter = Db::table('fa_job_hunter j')
+            ->field('j.*')
+            ->field('p.name as profession')
+            ->field('pl.name as profession_level')
+            ->join('fa_profession p','p.id = j.profession_id','LEFT')
+            ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
+            ->where('j.user_id',$user['id'])
+            ->find();
+        $this->view->assign('job_hunter',$job_hunter);
         return $this->view->fetch();
     }
 
@@ -222,6 +234,18 @@ class User extends Frontend
     public function profile()
     {
         $this->view->assign('title', __('Profile'));
+        $user = $this->auth->getUser();
+
+        //人才信息
+        $job_hunter = Db::table('fa_job_hunter j')
+            ->field('j.*')
+            ->field('p.name as profession')
+            ->field('pl.name as profession_level')
+            ->join('fa_profession p','p.id = j.profession_id','LEFT')
+            ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
+            ->where('j.user_id',$user['id'])
+            ->find();
+        $this->view->assign('job_hunter',$job_hunter);
         return $this->view->fetch();
     }
 

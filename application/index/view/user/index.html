@@ -20,7 +20,7 @@
             <div class="panel panel-default ">
                 <div class="panel-body">
                     <h2 class="page-header">
-                        {:__('Member center')}
+                        个人中心
                         <a href="{:url('user/profile')}" class="btn btn-success pull-right"><i class="fa fa-pencil"></i>
                             {:__('Profile')}</a>
                     </h2>
@@ -44,20 +44,8 @@
                                 <!-- Success -->
                                 <div class="basicinfo">
                                     <div class="row">
-                                        <div class="col-xs-4 col-md-2">{:__('Money')}</div>
-                                        <div class="col-xs-8 col-md-4">
-                                            <a href="javascript:;" class="viewmoney">{$user.money}</a>
-                                        </div>
-                                        <div class="col-xs-4 col-md-2">{:__('Score')}</div>
-                                        <div class="col-xs-8 col-md-4">
-                                            <a href="javascript:;" class="viewscore">{$user.score}</a>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-4 col-md-2">{:__('Successions')}</div>
-                                        <div class="col-xs-8 col-md-4">{$user.successions} {:__('Day')}</div>
-                                        <div class="col-xs-4 col-md-2">{:__('Maxsuccessions')}</div>
-                                        <div class="col-xs-8 col-md-4">{$user.maxsuccessions} {:__('Day')}</div>
+                                        <div class="col-xs-4 col-md-2">姓名</div>
+                                        <div class="col-xs-8 col-md-4">{$job_hunter.full_name}</div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-4 col-md-2">{:__('Logintime')}</div>

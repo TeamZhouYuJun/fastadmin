@@ -21,7 +21,6 @@ class Index extends Frontend
         $search_type = $this->request->get('search_type');
         //搜索值
         $search_value = $this->request->get('search_value');
-        $this->model = model('JobHunter');
         if ($search_value){
             $db = Db::table('fa_job_hunter j')
                 ->field('j.*')
@@ -63,7 +62,6 @@ class Index extends Frontend
     public function detail()
     {
         $detail_id = $this->request->get('detail_id');
-        $this->model = model('JobHunter');
         $data = Db::table('fa_job_hunter j')
             ->field('j.*')
             ->field('p.name as profession')
