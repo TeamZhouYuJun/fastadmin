@@ -1,122 +1,117 @@
 <!DOCTYPE html>
 <html>
-
-    <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>人才大厅</title>
-
-        <!-- Bootstrap Core CSS -->
-        <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="__CDN__/assets/css/index.css" rel="stylesheet">
-        <link href="__CDN__/assets/layer/mobile/need/layer.css" rel="stylesheet">
-
-        <!-- Plugin CSS -->
-        <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    </head>
-
-    <body id="page-top">
-        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
-                        <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
-                    </button>
-                    <!--<a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>-->
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-menu">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{:url('/')}">{:__('Home')}</a></li>
-                        <li><a href="{:url('index/user/index')}">人才中心</a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-
-        <div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
-            <div class="col-xs-7">
-                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value" value="{:request()->get('search_value')}" />
-            </div>
-            <div class="col-xs-3">
-                <select id="search_type" class="input-sm">
-                    {foreach $searchTypeArr as $k=> $vo}
-                    <option value ="{:$k}"  {if condition="($Request.get.search_type == $k)"}selected {/if} >{:$vo}</option>
-                    {/foreach}
-                </select>
-            </div>
-            <div class="col-xs-2">
-                <button type="button" onclick="search()" class="btn btn-default btn-sm " style="border-radius: 2px">搜 索</button>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>人才大厅</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+    <link href="__CDN__/assets/layer/mobile/need/layer.css" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top">
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse-menu">
+                <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll">{$site.name}</a>
         </div>
-
-        <div class="job">
-            <ul class="list-unstyled list-group">
-                {if condition="!empty($list)"}
-                {volist name="list" id="vo"}
-                    <li class="job-list list-group-item border-radius-5" detail-id="{$vo.id}">
-                        <div class="" style="padding: 10px;">
-                            <p class="text-left">姓名：{$vo.full_name}</p>
-                            <p class="text-left">工种：{$vo.profession}</p>
-                            <p class="text-left">毕业学校：{$vo.graduate_school}</p>
-                            <p class="text-left">{$vo.resume}</p>
-                        </div>
-                    </li>
-                {/volist}
-                {/if}
+        <div class="collapse navbar-collapse" id="navbar-collapse-menu">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{:url('/')}">{:__('Home')}</a></li>
+                <li><a href="{:url('index/user/index')}">人才中心</a></li>
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
+    <div class="col-xs-7">
+        <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value"
+               value="{:request()->get('search_value')}"/>
+    </div>
+    <div class="col-xs-3">
+        <select id="search_type" class="input-sm">
+            {foreach $searchTypeArr as $k=> $vo}
+            <option value="{:$k}" {if condition="($Request.get.search_type == $k)" }selected {
+            /if} >{:$vo}</option>
+            {/foreach}
+        </select>
+    </div>
+    <div class="col-xs-2">
+        <button type="button" onclick="search()" class="btn btn-default btn-sm " style="border-radius: 2px">搜 索</button>
+    </div>
+</div>
 
-        <!-- jQuery -->
-        <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
-        <script src="__CDN__/assets/layer/layer.js"></script>
-        <script>
-            function search(){
-                var search_type = document.getElementById("search_type").value;
-                var search_value = document.getElementById("search_value").value;
-                if (typeof(search_value)=="undefined" || search_value=='' || search_value==null){
-                    layer.msg("请输入搜索内容！");
-                    return false;
-                }
-                var url = window.location.href; //url路径
+<div class="job">
+    <ul class="list-unstyled list-group">
+        {if condition="!empty($list)"}
+        {volist name="list" id="vo"}
+        <li class="job-list list-group-item border-radius-5" detail-id="{$vo.id}">
+            <div class="" style="padding: 10px;">
+                <p class="text-left">姓名：{$vo.full_name}</p>
+                <p class="text-left">工种：{$vo.profession}</p>
+                <p class="text-left">毕业学校：{$vo.graduate_school}</p>
+                <p class="text-left">{$vo.resume}</p>
+            </div>
+        </li>
+        {/volist}
+        {/if}
+    </ul>
+</div>
 
-                var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
-                //地址拼接;
-                var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
+<!-- jQuery -->
+<script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+<script src="__CDN__/assets/layer/layer.js"></script>
+<script>
+    function search() {
+        var search_type = document.getElementById("search_type").value;
+        var search_value = document.getElementById("search_value").value;
+        if (typeof (search_value) == "undefined" || search_value == '' || search_value == null) {
+            layer.msg("请输入搜索内容！");
+            return false;
+        }
+        var url = window.location.href; //url路径
 
-                //跳转路径
-                window.location.href = goUrl;
-            }
+        var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+        //地址拼接;
+        var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
 
-            $(".job-list").click(function(){
-                var detail_id = $(this).attr("detail-id");
+        //跳转路径
+        window.location.href = goUrl;
+    }
 
-                //var url = window.location.href; //url路径
+    $(".job-list").click(function () {
+        var detail_id = $(this).attr("detail-id");
 
-                //地址拼接;
-                var goUrl = /*url +*/ '/index/index/detail?detail_id=' + detail_id;
+        //var url = window.location.href; //url路径
 
-                //跳转路径
-                window.location.href = goUrl;
-            });
+        //地址拼接;
+        var goUrl = /*url +*/ '/index/index/detail?detail_id=' + detail_id;
 
-        </script>
+        //跳转路径
+        window.location.href = goUrl;
+    });
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
+</script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 
 </html>

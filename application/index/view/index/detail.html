@@ -26,12 +26,20 @@
             <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style>
-            #mainNav{
-                overflow: hidden;
-            }
+
             .user-profile{
                 margin-top: 40px;
-                padding: 20px;
+                margin-left: 20px;
+                margin-right: 20px;
+                padding: 10px;
+                overflow: hidden;
+            }
+            .resume-title{
+                text-align: center;
+                margin: 0 auto;
+            }
+            #mainNav{
+                overflow: hidden;
             }
         </style>
     </head>
@@ -40,11 +48,11 @@
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="javascript:history.back(-1)" class="   " role="button">返回</a>
+
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
                         <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
                     </button>
-                    <!--<a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>-->
+                    <a href="javascript:history.back(-1)" class="navbar-brand page-scroll   " role="button">返回</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-menu">
                     <ul class="nav navbar-nav navbar-right">
@@ -56,38 +64,59 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <div class="card-body user-profile col-xs-4">
-        <div class="card-body user-profile col-xs-4">
-            <h1 >{$data.full_name}</h1>
-            <h4>性别:</h4>
-            <h4>年龄：</h4>
-            <h4>电话：</h4>
-            <h4>工种：</h4>
-            <h4>等级：</h4>
-            <h4>毕业学校：</h4>
-
+        <br>
+        <div class="user-profile list-group-item border-radius-5">
+            <div class="card-body col-xs-12">
+                <h1 >{$data.full_name}</h1>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>性别:</h4></div>
+                <div class="card-body  col-xs-8"><h4>
+                    {if condition="$data['gender'] == 1"}
+                    男
+                    {else /}
+                    女
+                    {/if}
+                </h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"> <h4>年龄：</h4></div>
+                <div class="card-body  col-xs-8"><h4>{$data.age}岁</h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>性别：</h4></div>
+                <div class="card-body  col-xs-8"><h4>
+                    {if condition="$data['gender'] == 1"}
+                    男
+                    {else /}
+                    女
+                    {/if}
+                </h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>电话:</h4></div>
+                <div class="card-body  col-xs-8"><h4><a href="tel:{$data.phone}">{$data.phone}</a></h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>工种: </h4></div>
+                <div class="card-body  col-xs-8"><h4>{$data.profession}</h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>等级: </h4></div>
+                <div class="card-body  col-xs-8"><h4>{$data.profession_level}</h4></div>
+            </div>
+            <div class="row-flex">
+                <div class="card-body  col-xs-4"><h4>毕业学校:</h4></div>
+                <div class="card-body  col-xs-8"><h4>{$data.graduate_school}</h4></div>
+            </div>
         </div>
-        <div class="card-body user-profile col-xs-8">
-            <h1 >&nbsp;</h1>
-            <h4>
-                {if condition="$data['gender'] == 1"}
-                男
-                {else /}
-                女
-                {/if}
-            </h4>
-            <h4>{$data.age}岁</h4>
-            <h4><a href="tel:{$data.phone}">{$data.phone}</a></h4>
-            <h4>{$data.profession}</h4>
-            <h4>{$data.profession_level}</h4>
-            <h4>{$data.graduate_school}</h4>
+        <hr style="width: 100%">
+        <div class="resume-title clo-sm-12">
+            <h3>成长履历</h3>
         </div>
-        <div>
-            <h2>成长履历</h2>
+        <div class="resume-content">
             {$data.resume}
         </div>
-
-
         <!-- jQuery -->
         <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
         <script>
