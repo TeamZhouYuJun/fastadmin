@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <title>人才大厅</title>
     <!-- Bootstrap Core CSS -->
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -19,6 +17,27 @@
     <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        #search_value{
+            border-top-left-radius:5px;
+            border-bottom-left-radius:5px;
+            padding:10px 10px;
+            border: 1px solid #dddddd;
+        }
+        #search_type{
+            border: 1px solid #dddddd;
+        }
+        option {
+            text-align: center;
+            color: red;
+        }
+        #search_btn{
+            border-top-right-radius:5px;
+            border-bottom-right-radius:5px;
+            background-color: #f8f8f8;
+            border: 1px solid #dddddd;
+        }
+    </style>
 </head>
 <body id="page-top">
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -40,33 +59,45 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-<div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
-    <div class="col-xs-7">
-        <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value"
-               value="{:request()->get('search_value')}"/>
+<div class="search" style="width: 100%; margin-top: 60px; overflow: hidden; padding: 10px">
+    <div class="col-xs-8 no-padding">
+        <input type="text" placeholder="输入姓名、电话、工种、等级" class="height-34 input full-width" name="search_value" id="search_value" value="{:request()->get('search_value')}"/>
     </div>
-    <div class="col-xs-3">
-        <select id="search_type" class="input-sm">
+    <div class="col-xs-2 no-padding" >
+        <select id="search_type" class="height-34 full-width" style="text-align: center">
             {foreach $searchTypeArr as $k=> $vo}
-            <option value="{:$k}" {if condition="($Request.get.search_type == $k)" }selected {
-            /if} >{:$vo}</option>
+            <option value="{:$k}" {if condition="($Request.get.search_type == $k)" }selected {/if} >{:$vo} </option>
             {/foreach}
         </select>
     </div>
-    <div class="col-xs-2">
-        <button type="button" onclick="search()" class="btn btn-default btn-sm " style="border-radius: 2px">搜 索</button>
+    <div class="col-xs-2 no-padding" >
+        <button type="button" onclick="search()" id="search_btn" class="height-34 full-width" >搜 索</button>
     </div>
 </div>
-
 <div class="job">
     <ul class="list-unstyled list-group">
         {if condition="!empty($list)"}
         {volist name="list" id="vo"}
         <li class="job-list list-group-item border-radius-5" detail-id="{$vo.id}">
+
+            <div class=" col-xs-12">
+                <div class="col-xs-7 no-padding" >
+                    <p style="text-align: left">姓名：{$vo.full_name}</p>
+                    <p class="text-left">工种：{$vo.profession}</p>
+                    <p class="text-left">毕业学校：{$vo.graduate_school}</p>
+                </div>
+                <div class="col-xs-5 no-padding">
+                    <a href="#" class="thumbnail">
+                        {if !empty($vo.avatar)}
+                            <img src="{$vo.avatar}" alt="..."/>
+                        {else /}
+                            <img src="{$genderAvatar[$vo.gender]}" alt="..."/>
+                        {/if}
+
+                    </a>
+                </div>
+            </div>
             <div class="" style="padding: 10px;">
-                <p class="text-left">姓名：{$vo.full_name}</p>
-                <p class="text-left">工种：{$vo.profession}</p>
-                <p class="text-left">毕业学校：{$vo.graduate_school}</p>
                 <p class="text-left">{$vo.resume}</p>
             </div>
         </li>

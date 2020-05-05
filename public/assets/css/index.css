@@ -258,3 +258,15 @@ footer ul li a.active {
 .navbar{
     overflow: hidden;
 }
+.no-padding{
+    padding: 0;
+}
+.height-34{
+    height: 34px;
+}
+.full-width{
+    width: 100%;
+}
+.f-w-bolder{
+    font-weight: bolder;
+}

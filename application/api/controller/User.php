@@ -147,11 +147,16 @@ class User extends Api
      */
     public function profile()
     {
+
         $user = $this->auth->getUser();
         $username = $this->request->request('username');
         $nickname = $this->request->request('nickname');
         $bio = $this->request->request('bio');
         $avatar = $this->request->request('avatar', '', 'trim,strip_tags,htmlspecialchars');
+        //未经过滤的参数  ->post( false)
+        $postOrigin=$this->request->post(false);
+        $resume=$postOrigin['resume'];
+
         if ($username) {
             $exists = \app\common\model\User::where('username', $username)->where('id', '<>', $this->auth->id)->find();
             if ($exists) {
@@ -177,7 +182,7 @@ class User extends Api
                 'graduate_school'=> $this->request->request('graduate_school'),
                 'profession_id'=> $this->request->request('profession'),
                 'profession_level_id'=> $this->request->request('profession_level'),
-                'resume'=> $this->request->request('resume'),
+                'resume'=> $resume,
                 'updatetime'=> time(),
             ];
             $update = Db::table('fa_job_hunter')->where('user_id', $this->auth->id)->update($update_data);
@@ -196,7 +201,7 @@ class User extends Api
                 'graduate_school'=> $this->request->request('graduate_school'),
                 'profession_id'=> $this->request->request('profession'),
                 'profession_level_id'=> $this->request->request('profession_level'),
-                'resume'=> $this->request->request('resume'),
+                'resume'=> $resume,
                 'createtime'=> time(),
                 'updatetime'=> time(),
             ];

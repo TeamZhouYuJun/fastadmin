@@ -1,42 +1,44 @@
 <!DOCTYPE html>
+<?php #dump($genderAvatar);die;  ?>
 <html>
-
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>人才详情</title>
-
         <!-- Bootstrap Core CSS -->
        <!-- <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">-->
         <link href="__CDN__/assets/css/bootstrap3.7.css" rel="stylesheet">
         <link href="__CDN__/assets/css/index.css" rel="stylesheet">
-
         <!-- Plugin CSS -->
         <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style>
-
+            .main-container{
+                margin:40px 10px 0 10px;
+            }
             .user-profile{
-                margin-top: 40px;
-                margin-left: 20px;
-                margin-right: 20px;
-                padding: 10px;
                 overflow: hidden;
+                padding-bottom: 20px;
             }
             .resume-title{
-                text-align: center;
+                position: relative;
+                top: 20px;
+                font-size: 18px;
                 margin: 0 auto;
+            }
+            .resume-content{
+                position: relative;
+                top: 20px;
+                border-radius: 5px;
+                font-size: 16px;
             }
             #mainNav{
                 overflow: hidden;
@@ -45,6 +47,7 @@
     </head>
 
     <body id="page-top">
+    <div class="main-container list-group-item">
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -52,7 +55,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
                         <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
                     </button>
-                    <a href="javascript:history.back(-1)" class="navbar-brand page-scroll   " role="button">返回</a>
+                    <a href="javascript:history.back(-1)" class="navbar-brand page-scroll   " role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>返回</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-menu">
                     <ul class="nav navbar-nav navbar-right">
@@ -65,11 +68,22 @@
             <!-- /.container-fluid -->
         </nav>
         <br>
-        <div class="user-profile list-group-item border-radius-5">
+        <div class="user-profile border-radius-5">
             <div class="card-body col-xs-12">
-                <h1 >{$data.full_name}</h1>
+                <div class="card-body  col-xs-6"><h2 >{$data.full_name}</h2></div>
+                <div class="col-xs-6 col-md-3">
+                    <a href="#" class="thumbnail">
+                        {if !empty($data.avatar)}888
+                            <img src="{$data.avatar}" alt="..."/>
+                        {else /}
+                            <img src="{$genderAvatar[$data.gender]}" alt="..."/>
+                        {/if}
+                    </a>
+                </div>
+
             </div>
             <div class="row-flex">
+                <div></div>
                 <div class="card-body  col-xs-4"><h4>性别:</h4></div>
                 <div class="card-body  col-xs-8"><h4>
                     {if condition="$data['gender'] == 1"}
@@ -109,14 +123,16 @@
                 <div class="card-body  col-xs-4"><h4>毕业学校:</h4></div>
                 <div class="card-body  col-xs-8"><h4>{$data.graduate_school}</h4></div>
             </div>
+            <div class="resume-title clo-sm-12 f-w-bolder" >
+                <h4>成长履历</h4>
+            </div>
+
         </div>
-        <hr style="width: 100%">
-        <div class="resume-title clo-sm-12">
-            <h3>成长履历</h3>
-        </div>
-        <div class="resume-content">
+        <div class="resume-content jumbotron">
             {$data.resume}
         </div>
+    </div>
+
         <!-- jQuery -->
         <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
         <script>

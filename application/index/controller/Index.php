@@ -20,6 +20,11 @@ class Index extends Frontend
         "graduate_school"=>'毕业学校'
     ];
 
+    protected $genderAvatar=[
+        '1'=>'/assets/img/const/ismale.png',
+        '0'=>'/assets/img/const/female.png',
+    ];
+
     /**
      * 人才列表页
      */
@@ -49,8 +54,12 @@ class Index extends Frontend
             $list = Db::table('fa_job_hunter j')
                 ->field('j.*')
                 ->field('p.name as profession')
+                ->field('u.avatar as avatar')
                 ->join('fa_profession p','p.id = j.profession_id','LEFT')
                 ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
+                ->join('fa_user u','u.id = j.user_id','LEFT')
+                ->limit(0,10)
+                ->order('j.id',"DESC")
                 ->select();
         }
 
@@ -63,6 +72,7 @@ class Index extends Frontend
         //dump($list);die;
 
         $this->view->assign('searchTypeArr', $this->searchTypeArr);
+        $this->view->assign('genderAvatar',$this->genderAvatar);
         $this->view->assign('list', $list);
         return $this->view->fetch();
     }
@@ -77,11 +87,13 @@ class Index extends Frontend
             ->field('j.*')
             ->field('p.name as profession')
             ->field('pl.name as profession_level')
+            ->field('u.avatar as avatar')
             ->join('fa_profession p','p.id = j.profession_id','LEFT')
             ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
+            ->join('fa_user u','u.id = j.user_id','LEFT')
             ->where('j.id',$detail_id)
             ->find();
-
+        $this->view->assign('genderAvatar',$this->genderAvatar);
         $this->view->assign('data', $data);
         return $this->view->fetch();
     }
