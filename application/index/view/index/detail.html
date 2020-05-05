@@ -12,7 +12,8 @@
         <title>人才详情</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">
+       <!-- <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">-->
+        <link href="__CDN__/assets/css/bootstrap3.7.css" rel="stylesheet">
         <link href="__CDN__/assets/css/index.css" rel="stylesheet">
 
         <!-- Plugin CSS -->
@@ -24,25 +25,66 @@
             <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
             <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            #mainNav{
+                overflow: hidden;
+            }
+            .user-profile{
+                margin-top: 40px;
+                padding: 20px;
+            }
+        </style>
     </head>
 
     <body id="page-top">
-        <a href="javascript:history.back(-1)" class="btn btn-default btn-lg active" role="button">返回</a>
-        <div class="row">
-            <h1>{$data.full_name}</h1>
-            {if condition="$data['gender'] == 1"}
-                <h2>男</h2>
-            {else /}
-                <h2>女</h2>
-            {/if}
-            <h2>{$data.age}岁</h2>
-            <h2>电话：{$data.phone}</h2>
-            <h2>工种：{$data.profession}</h2>
-            <h2>毕业学校：{$data.graduate_school}</h2>
-            <div>
-                <h2>成长履历</h2>
-                {$data.resume}
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="javascript:history.back(-1)" class="   " role="button">返回</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
+                        <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+                    </button>
+                    <!--<a class="navbar-brand page-scroll" href="#page-top">{$site.name}</a>-->
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{:url('/')}">{:__('Home')}</a></li>
+                        <li><a href="{:url('index/user/index')}">人才中心</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="card-body user-profile col-xs-4">
+        <div class="card-body user-profile col-xs-4">
+            <h1 >{$data.full_name}</h1>
+            <h4>性别:</h4>
+            <h4>年龄：</h4>
+            <h4>电话：</h4>
+            <h4>工种：</h4>
+            <h4>等级：</h4>
+            <h4>毕业学校：</h4>
+
+        </div>
+        <div class="card-body user-profile col-xs-8">
+            <h1 >&nbsp;</h1>
+            <h4>
+                {if condition="$data['gender'] == 1"}
+                男
+                {else /}
+                女
+                {/if}
+            </h4>
+            <h4>{$data.age}岁</h4>
+            <h4><a href="tel:{$data.phone}">{$data.phone}</a></h4>
+            <h4>{$data.profession}</h4>
+            <h4>{$data.profession_level}</h4>
+            <h4>{$data.graduate_school}</h4>
+        </div>
+        <div>
+            <h2>成长履历</h2>
+            {$data.resume}
         </div>
 
 

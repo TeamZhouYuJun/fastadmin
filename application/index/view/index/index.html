@@ -49,26 +49,26 @@
 
         <div class="search" style="width: 100%; margin-top: 60px; overflow: hidden;">
             <div class="col-xs-7">
-                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value" value="" />
+                <input type="text" placeholder="输入姓名、电话、工种、等级、毕业学校" class="form-control" name="search_value" id="search_value" value="{:request()->get('search_value')}" />
             </div>
-            <div class="col-xs-5">
-                <select id="search_type" class="input-xs">
-                    <option value ="full_name">姓名</option>
-                    <option value ="phone">电话</option>
-                    <option value="profession">工种</option>
-                    <option value="profession_level">等级</option>
-                    <option value="graduate_school">毕业学校</option>
+            <div class="col-xs-3">
+                <select id="search_type" class="input-sm">
+                    {foreach $searchTypeArr as $k=> $vo}
+                    <option value ="{:$k}"  {if condition="($Request.get.search_type == $k)"}selected {/if} >{:$vo}</option>
+                    {/foreach}
                 </select>
-                <button type="button" onclick="search()" class="btn btn-default btn-xs active">搜索</button>
+            </div>
+            <div class="col-xs-2">
+                <button type="button" onclick="search()" class="btn btn-default btn-sm " style="border-radius: 2px">搜 索</button>
             </div>
         </div>
 
         <div class="job">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled list-group">
                 {if condition="!empty($list)"}
                 {volist name="list" id="vo"}
-                    <li class="job-list" detail-id="{$vo.id}">
-                        <div  style="padding: 10px;">
+                    <li class="job-list list-group-item border-radius-5" detail-id="{$vo.id}">
+                        <div class="" style="padding: 10px;">
                             <p class="text-left">姓名：{$vo.full_name}</p>
                             <p class="text-left">工种：{$vo.profession}</p>
                             <p class="text-left">毕业学校：{$vo.graduate_school}</p>

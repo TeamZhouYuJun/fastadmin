@@ -252,3 +252,9 @@ footer ul li a.active {
     padding: 10px 45px;
     font-size: 14px;
 }
+.border-radius-5{
+    border-radius:5px ;
+}
+.navbar{
+    overflow: hidden;
+}

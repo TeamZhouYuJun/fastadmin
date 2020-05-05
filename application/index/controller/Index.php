@@ -12,6 +12,14 @@ class Index extends Frontend
     protected $noNeedRight = '*';
     protected $layout = '';
 
+    protected $searchTypeArr=[
+       "full_name"=>'姓名',
+        "phone"=>'电话',
+        "profession"=>'工种',
+        "profession_level"=>'等级',
+        "graduate_school"=>'毕业学校'
+    ];
+
     /**
      * 人才列表页
      */
@@ -52,6 +60,9 @@ class Index extends Frontend
             //简历内容限制输出25位字符
             $list[$k]['resume'] = mb_substr($list[$k]['resume'],0,25).'...';
         }
+        //dump($list);die;
+
+        $this->view->assign('searchTypeArr', $this->searchTypeArr);
         $this->view->assign('list', $list);
         return $this->view->fetch();
     }
