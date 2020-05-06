@@ -68,12 +68,14 @@
             <!-- /.container-fluid -->
         </nav>
         <br>
+        <br>
+        <br>
         <div class="user-profile border-radius-5">
             <div class="card-body col-xs-12">
                 <div class="card-body  col-xs-6 no-padding"><h2 >{$data.full_name}</h2></div>
                 <div class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail">
-                        {if !empty($data.avatar)}888
+                        {if !empty($data.avatar)}
                             <img src="{$data.avatar}" alt="..."/>
                         {else /}
                             <img src="{$genderAvatar[$data.gender]}" alt="..."/>
@@ -96,16 +98,6 @@
             <div class="row-flex">
                 <div class="card-body  col-xs-4"> <h4>年龄：</h4></div>
                 <div class="card-body  col-xs-8"><h4>{$data.age}岁</h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"><h4>性别：</h4></div>
-                <div class="card-body  col-xs-8"><h4>
-                    {if condition="$data['gender'] == 1"}
-                    男
-                    {else /}
-                    女
-                    {/if}
-                </h4></div>
             </div>
             <div class="row-flex">
                 <div class="card-body  col-xs-4"><h4>电话:</h4></div>

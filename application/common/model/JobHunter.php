@@ -36,4 +36,14 @@ class JobHunter extends Model
     }
 
 
+    /**
+     * @param $resume
+     * @return mixed
+     */
+    public static  function  subResume( $resume){
+
+        $resume=  mb_substr(strip_tags($resume),0,25).'...';
+        return $resume;
+    }
+
 }

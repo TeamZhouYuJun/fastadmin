@@ -3,7 +3,10 @@
 namespace app\index\controller;
 
 use app\common\controller\Frontend;
+use app\common\model\JobHunter;
 use think\Db;
+use think\Exception;
+use think\exception\DbException;
 
 class Index extends Frontend
 {
@@ -27,9 +30,12 @@ class Index extends Frontend
 
     /**
      * 人才列表页
+     * @throws DbException
+     * @throws Exception
      */
     public function index()
     {
+        $pageSize=5;
         //搜索类型
         $search_type = $this->request->get('search_type');
         //搜索值
@@ -38,42 +44,48 @@ class Index extends Frontend
             $db = Db::table('fa_job_hunter j')
                 ->field('j.*')
                 ->field('p.name as profession')
+                ->field('u.avatar as avatar')
                 ->join('fa_profession p','p.id = j.profession_id','LEFT')
-                ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT');
+                ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
+                ->join('fa_user u','u.id = j.user_id','LEFT');
             if ($search_type == 'profession'){ //根据工种查找
-                $list = $db->where('p.name', 'like', '%'.$search_value.'%')
-                    ->select();
+                $db->where('p.name', 'like', '%'.$search_value.'%');
             }elseif($search_type == 'profession_level'){ //根据工种等级查找
-                $list = $db->where('pl.name', 'like', '%'.$search_value.'%')
-                    ->select();
+                $db->where('pl.name', 'like', '%'.$search_value.'%');
             }else{  //其他类型查找
-                $list = $db->where('j.'.$search_type, 'like', '%'.$search_value.'%')
-                    ->select();
+                $db->where('j.'.$search_type, 'like', '%'.$search_value.'%');
             }
+            //分页查找
+            $list=$db-> paginate($pageSize,false,['query'=>request()->param()]);
         }else{
             $list = Db::table('fa_job_hunter j')
                 ->field('j.*')
                 ->field('p.name as profession')
                 ->field('u.avatar as avatar')
                 ->join('fa_profession p','p.id = j.profession_id','LEFT')
-                ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
                 ->join('fa_user u','u.id = j.user_id','LEFT')
-                ->limit(0,10)
                 ->order('j.id',"DESC")
-                ->select();
+                ->paginate($pageSize)
+                /*->each(function (&$item ,$index){
+                    $item->resume=mb_substr(strip_tags($item->resume),0,25);
+                    //dump($item['resume']);
+                    //dump($item);
+                    //dump(is_array($item));
+                })*/;
         }
+        $listTemp =$list->toArray();
+        $listTemp=$listTemp['data'];
+        //dump($listTemp);die;
 
-        foreach ($list as $k => $v){
-            //过滤html标签
-            $list[$k]['resume'] = strip_tags($v['resume']);
-            //简历内容限制输出25位字符
-            $list[$k]['resume'] = mb_substr($list[$k]['resume'],0,25).'...';
+       foreach ($listTemp as $k =>  $v){
+           //过滤html标签 简历内容限制输出25位字符
+           $listTemp[$k]['resume'] = JobHunter::subResume($v['resume']);
         }
-        //dump($list);die;
 
         $this->view->assign('searchTypeArr', $this->searchTypeArr);
         $this->view->assign('genderAvatar',$this->genderAvatar);
-        $this->view->assign('list', $list);
+        $this->view->assign('list', $listTemp);
+        $this->view->assign('page',$list->render());
         return $this->view->fetch();
     }
 

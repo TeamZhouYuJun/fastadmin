@@ -29,13 +29,20 @@
         }
         option {
             text-align: center;
-            color: red;
         }
         #search_btn{
             border-top-right-radius:5px;
             border-bottom-right-radius:5px;
             background-color: #f8f8f8;
             border: 1px solid #dddddd;
+        }
+        .page-row{
+            margin: 0 auto;
+            text-align: center;
+        }
+        .pagination{
+            margin: 0 auto;
+            text-align: center;
         }
     </style>
 </head>
@@ -59,10 +66,12 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+<div style="height: 20px"><!--空行 支撑高度--></div>
 <div class="search" style="width: 100%; margin-top: 60px; overflow: hidden; padding: 10px">
     <div class="col-xs-8 no-padding">
         <input type="text" placeholder="输入姓名、电话、工种、等级" class="height-34 input full-width" name="search_value" id="search_value" value="{:request()->get('search_value')}"/>
     </div>
+
     <div class="col-xs-2 no-padding" >
         <select id="search_type" class="height-34 full-width" style="text-align: center">
             {foreach $searchTypeArr as $k=> $vo}
@@ -75,7 +84,8 @@
     </div>
 </div>
 <div class="job">
-    <ul class="list-unstyled list-group">
+    {if (count($list) > 0 )}
+        <ul class="list-unstyled list-group">
         {if condition="!empty($list)"}
         {volist name="list" id="vo"}
         <li class="job-list list-group-item border-radius-5" detail-id="{$vo.id}">
@@ -104,6 +114,12 @@
         {/volist}
         {/if}
     </ul>
+    {else /}
+    <h4 style="position: absolute;bottom: 20px;text-align: center;margin: 0 auto">这里什么都没有搜出来 (´-﹏-`；)</h4>
+    {/if}
+</div>
+<div class="page-row">
+    {$page}
 </div>
 
 <!-- jQuery -->
