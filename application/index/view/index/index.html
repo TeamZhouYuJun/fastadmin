@@ -150,7 +150,8 @@
         var search_type = document.getElementById("search_type").value;
         var search_value = document.getElementById("search_value").value;
         if (typeof (search_value) == "undefined" || search_value == '' || search_value == null) {
-            layer.msg("请输入搜索内容！");
+            //layer.msg("请输入搜索内容！");
+            window.location.href = '/?search_type=full_name&search_value';
             return false;
         }
         var url = window.location.href; //url路径
@@ -178,6 +179,15 @@
         let menuShow=document.getElementsByClassName('navbar-collapse-menu').style
         console.log(menuShow)
     })*/
+    $(".search").bind("keydown",function(e){
+        // 兼容FF和IE和Opera
+        var theEvent = e || window.event;
+        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if (code == 13) {
+            //回车执行查询
+            search();
+        }
+    });
 
 </script>
 

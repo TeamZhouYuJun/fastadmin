@@ -25,6 +25,9 @@
             position: relative;
             top:3px
         }
+        .list-group-item{
+            padding: 0;
+        }
         .main-container {
             margin: 40px 10px 0 10px;
         }
@@ -39,10 +42,6 @@
         .name-text{
             font-weight: bolder;
             font-size: 24px;
-        }
-        .thumbnail-clo{
-            position: absolute;
-            right: -15px;
         }
 
         .resume-title {
@@ -111,8 +110,8 @@
             </div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left col-xs-4">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div>
-            <div class="card-body  col-xs-8">
+            <div class="card-body columns-left col-xs-5">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div>
+            <div class="card-body  col-xs-7">
                 {if condition="$data['gender'] == 1"}
                 男
                 {else /}
@@ -121,27 +120,27 @@
             </div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left  col-xs-4">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：</div>
-            <div class="card-body  col-xs-8">{$data.age}岁</div>
+            <div class="card-body columns-left  col-xs-5">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：</div>
+            <div class="card-body  col-xs-7">{$data.age}岁</div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left col-xs-4">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</div>
-            <div class="card-body  col-xs-8"><a class="tel-text" href="tel:{$data.phone}">{$data.phone}</a></div>
+            <div class="card-body columns-left col-xs-5">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</div>
+            <div class="card-body  col-xs-7"><a class="tel-text" href="tel:{$data.phone}">{$data.phone}</a></div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left  col-xs-4">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种:</div>
-            <div class="card-body  col-xs-8">{$data.profession}</div>
+            <div class="card-body columns-left  col-xs-5">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种:</div>
+            <div class="card-body  col-xs-7">{$data.profession}</div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left col-xs-4">等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级:</div>
-            <div class="card-body  col-xs-8">{$data.profession_level}</div>
+            <div class="card-body columns-left col-xs-5">等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级:</div>
+            <div class="card-body  col-xs-7">{$data.profession_level}</div>
         </div>
         <div class="row-flex col-xs-12">
-            <div class="card-body columns-left col-xs-4">毕业学校:</div>
-            <div class="card-body  col-xs-8">{$data.graduate_school}</div>
+            <div class="card-body columns-left col-xs-5">毕业学校:</div>
+            <div class="card-body  col-xs-7">{$data.graduate_school}</div>
         </div>
         <div class="resume-title row-flex col-xs-12 f-w-bolder">
-            <div class="card-body columns-left col-xs-4">成长履历:</div>
+            <div class="card-body columns-left col-xs-5">成长履历:</div>
         </div>
     </div>
     <div class="resume-content jumbotron">
