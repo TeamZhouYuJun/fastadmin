@@ -101,6 +101,8 @@ class Professionlevel extends Backend
             $this->error();
         }
         $row=$this->model->find(intval($ids));
+        //$row=$this->model->where('id',$ids)->select();
+        //$row=$row[0];
         $this->assign('row',$row);
         $this->assign('professions',model('Profession')->getSelectList());
         return $this->view->fetch();

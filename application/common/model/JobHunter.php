@@ -18,6 +18,12 @@ class JobHunter extends Model
 
     private $gender=[0 =>'女',1=>'男'];
 
+    public $searchUserTypeArr=[
+        "username"=>'用户名',
+        "mobile"=>'电话',
+        "email"=>'邮箱',
+    ];
+
     public function GetGenderAttr($value)
     {
        return $this->gender[$value];

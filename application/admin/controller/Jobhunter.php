@@ -28,6 +28,9 @@ class Jobhunter extends Backend
         $this->model = model('JobHunter');
     }
 
+
+
+
     /**
      * 查看
      */
@@ -62,6 +65,7 @@ class Jobhunter extends Backend
 
     public function add()
     {
+        $userId=$this->request->get("userId");
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
             if ($params) {
@@ -77,8 +81,16 @@ class Jobhunter extends Backend
             }
         $this->error();
         }
+        if ($userId!=null){
+
+            $user=model("User")->find($userId);
+            //            build_select('row[user_id]', [  $user['id'] => $user['username'].$user['mobile']], 1, ['class'=>'form-control', 'required'=>'']);die;
+            $this->assign('user',$user);
+        }
+
         $professions=model('Profession')->getSelectList();
         $professionLevels=model('ProfessionLevel')->getSelectList();
+        $this->assign('searchTypeArr',$this->model->searchUserTypeArr);
         $this->assign('professions',$professions);
         $this->assign('levels',$professionLevels);
         return $this->view->fetch();
@@ -109,6 +121,49 @@ class Jobhunter extends Backend
     }
 
 
+    public function resume($ids = null){
+           $row=$this->model->where(  'user_id',$ids)->find();
+           if (isset($row)){
+               $this->redirect(url('jobhunter/edit/',['userId'=>$ids]));
+           }
+           else{
+               $this->redirect(url('jobhunter/add/',['userId'=>$ids]));
+           }
+    }
+
+    //创建   所属用户 的selector
+    public function buildUserSelector(){
+        $search_type = trim($this->request->get('search_type'));
+
+        $search_value = trim($this->request->get('search_value'));
+
+        if (!isset($this->model->searchUserTypeArr[$search_type]))
+        {
+            $this->error('不支持的搜索类型');
+        }
+        if (empty($search_value))
+        {
+            $this->error('请输入搜索的对象');
+        }
+
+        $where = $search_type . " LIKE  %".$search_value."%";
+        $users = model('User')
+            ->field('id,username,mobile,email')
+            ->where($search_type , "like",'%'.$search_value.'%')
+            ->select();
+        $list=array();
+        if (count($users) > 0){
+            foreach ($users as $item){
+                //dump($item);die;
+                $list[$item['id']]=$item['username'].'-'.$item['mobile'];
+            }
+            $selectorHtml= build_select('row[user_id]', $list, 1, ['class' => 'form-control', 'required' => '']);
+            $this->success('ok',null,$selectorHtml);
+        }else
+        {
+            $this->error('什麽都不搜索到');
+        }
+    }
 
 
 }

@@ -1,163 +1,160 @@
 <!DOCTYPE html>
 <?php #dump($genderAvatar);die;  ?>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>人才详情</title>
-        <!-- Bootstrap Core CSS -->
-       <!-- <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">-->
-        <link href="__CDN__/assets/css/bootstrap3.7.css" rel="stylesheet">
-        <link href="__CDN__/assets/css/index.css" rel="stylesheet">
-        <!-- Plugin CSS -->
-        <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <style>
-            .main-container{
-                margin:40px 10px 0 10px;
-            }
-            .user-profile{
-                overflow: hidden;
-                padding-bottom: 20px;
-            }
-            .resume-title{
-                position: relative;
-                top: 20px;
-                font-size: 18px;
-                margin: 0 auto;
-            }
-            .resume-content{
-                position: relative;
-                top: 20px;
-                border-radius: 5px;
-                font-size: 16px;
-            }
-            #mainNav{
-                overflow: hidden;
-            }
-        </style>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>人才详情</title>
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/.min.css" rel="stylesheet">-->
+    <link href="__CDN__/assets/css/bootstrap3.7.css" rel="stylesheet">
+    <link href="__CDN__/assets/css/index.css" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .glyphicon-menu-left{
+            position: relative;
+            top:3px
+        }
+        .main-container {
+            margin: 40px 10px 0 10px;
+        }
+        .user-profile {
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
 
-    <body id="page-top">
-    <div class="main-container list-group-item">
-        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
+        .name-row{
+            height: 200px;
+        }
+        .name-text{
+            font-weight: bolder;
+            font-size: 24px;
+        }
+        .thumbnail-clo{
+            position: absolute;
+            right: -15px;
+        }
 
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
-                        <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
-                    </button>
-                    <a href="javascript:history.back(-1)" class="navbar-brand page-scroll   " role="button"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>返回</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-menu">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{:url('/')}">{:__('Home')}</a></li>
-                        <li><a href="{:url('index/user/index')}">人才中心</a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+        .resume-title {
+            position: relative;
+            top: 5px;
+            font-size: 18px;
+            margin: 0 auto;
+        }
+        .columns-left {
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        .resume-content {
+            position: relative;
+            top: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #mainNav {
+            overflow: hidden;
+        }
+        .tel-text {
+            color: black;
+        }
+        .row-flex {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body id="page-top">
+<div class="main-container list-group-item">
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-menu">
+                    <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
+                </button>
+                <a href="javascript:history.back(-1)" class="navbar-brand page-scroll   " role="button">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>返回
+                </a>
             </div>
-            <!-- /.container-fluid -->
-        </nav>
-        <br>
-        <br>
-        <br>
-        <div class="user-profile border-radius-5">
-            <div class="card-body col-xs-12">
-                <div class="card-body  col-xs-6 no-padding"><h2 >{$data.full_name}</h2></div>
-                <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
-                        {if !empty($data.avatar)}
-                            <img src="{$data.avatar}" alt="..."/>
-                        {else /}
-                            <img src="{$genderAvatar[$data.gender]}" alt="..."/>
-                        {/if}
-                    </a>
-                </div>
-
+            <div class="collapse navbar-collapse" id="navbar-collapse-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{:url('/')}">{:__('Home')}</a></li>
+                    <li><a href="{:url('index/user/index')}">人才中心</a></li>
+                </ul>
             </div>
-            <div class="row-flex">
-                <div></div>
-                <div class="card-body  col-xs-4"><h4>性别:</h4></div>
-                <div class="card-body  col-xs-8"><h4>
-                    {if condition="$data['gender'] == 1"}
-                    男
-                    {else /}
-                    女
-                    {/if}
-                </h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"> <h4>年龄：</h4></div>
-                <div class="card-body  col-xs-8"><h4>{$data.age}岁</h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"><h4>电话:</h4></div>
-                <div class="card-body  col-xs-8"><h4><a href="tel:{$data.phone}">{$data.phone}</a></h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"><h4>工种: </h4></div>
-                <div class="card-body  col-xs-8"><h4>{$data.profession}</h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"><h4>等级: </h4></div>
-                <div class="card-body  col-xs-8"><h4>{$data.profession_level}</h4></div>
-            </div>
-            <div class="row-flex">
-                <div class="card-body  col-xs-4"><h4>毕业学校:</h4></div>
-                <div class="card-body  col-xs-8"><h4>{$data.graduate_school}</h4></div>
-            </div>
-            <div class="resume-title clo-sm-12 f-w-bolder" >
-                <h4>成长履历</h4>
-            </div>
-
+            <!-- /.navbar-collapse -->
         </div>
-        <div class="resume-content jumbotron">
-            {$data.resume}
+        <!-- /.container-fluid -->
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div class="user-profile border-radius-5">
+        <div class="card-body col-xs-12 name-row">
+            <div class="card-body  col-xs-6 "><p class="name-text">{$data.full_name}</p></div>
+            <div class="col-xs-6 thumbnail-clo">
+                <a href="#" class="thumbnail">
+                    {if !empty($data.avatar)}
+                    <img src="{$data.avatar}" alt="..."/>
+                    {else /}
+                    <img src="{$genderAvatar[$data.gender]}" alt="..."/>
+                    {/if}
+                </a>
+            </div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left col-xs-4">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div>
+            <div class="card-body  col-xs-8">
+                {if condition="$data['gender'] == 1"}
+                男
+                {else /}
+                女
+                {/if}
+            </div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left  col-xs-4">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：</div>
+            <div class="card-body  col-xs-8">{$data.age}岁</div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left col-xs-4">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</div>
+            <div class="card-body  col-xs-8"><a class="tel-text" href="tel:{$data.phone}">{$data.phone}</a></div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left  col-xs-4">工&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;种:</div>
+            <div class="card-body  col-xs-8">{$data.profession}</div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left col-xs-4">等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级:</div>
+            <div class="card-body  col-xs-8">{$data.profession_level}</div>
+        </div>
+        <div class="row-flex col-xs-12">
+            <div class="card-body columns-left col-xs-4">毕业学校:</div>
+            <div class="card-body  col-xs-8">{$data.graduate_school}</div>
+        </div>
+        <div class="resume-title row-flex col-xs-12 f-w-bolder">
+            <div class="card-body columns-left col-xs-4">成长履历:</div>
         </div>
     </div>
+    <div class="resume-content jumbotron">
+        {$data.resume}
+    </div>
+</div>
+<!-- jQuery -->
+<script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+<script>
+</script>
 
-        <!-- jQuery -->
-        <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
-        <script>
-            function search(){
-                var search_type = document.getElementById("search_type").value;
-                var search_value = document.getElementById("search_value").value;
-
-                var url = window.location.href; //url路径
-
-                var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
-                //地址拼接;
-                var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
-
-                //跳转路径
-                window.location.href = goUrl;
-            }
-
-            $(".job-list").click(function(){
-                var detail_id = $(this).attr("detail-id");
-
-                var url = window.location.href; //url路径
-
-                //地址拼接;
-                var goUrl = url + 'detail?detail_id=' + detail_id;
-
-                //跳转路径
-                window.location.href = goUrl;
-            });
-
-        </script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 
 </html>

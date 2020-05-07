@@ -22,11 +22,7 @@ class ProfessionLevel extends Model
     protected $table ='fa_profession_level';
 
 
-    public function profession()
-    {
-        //dump($this->belongsTo('Profession','profession_id'));die;
-        return $this->belongsTo('Profession','profession_id');
-    }
+
 
     /**
      * 获取用于 $professionId 下拉选框的 list:  ['id'=>'name']
