@@ -27,7 +27,70 @@
         position:absolute;
         top:0;left:0;width:100px;height:100px;opacity: 0;
     }
+    .form-layer {height:100%;min-height:150px;min-width:300px;}
+    .form-body {
+        width:100%;
+        overflow:auto;
+        top:0;
+        position:absolute;
+        z-index:10;
+        bottom:50px;
+        padding:15px;
+    }
+    .form-layer .form-footer {
+        height:50px;
+        line-height:50px;
+        background-color: #ecf0f1;
+        width:100%;
+        position:absolute;
+        z-index:200;
+        bottom:0;
+        margin:0;
+    }
+    .form-footer .form-group{
+        margin-left:0;
+        margin-right:0;
+    }
+    .full-width{
+        width: 100%
+    }
+
+
+    .w-e-toolbar {
+        flex-wrap: wrap;
+        -webkit-box-lines: multiple;
+    }
+
+    .w-e-toolbar .w-e-menu:hover{
+        z-index: 10002!important;
+    }
+
+    .w-e-menu a {
+        text-decoration: none;
+    }
+
+    .fullscreen-editor {
+        position: fixed !important;
+        width: 100% !important;
+        height: 100% !important;
+        left: 0px !important;
+        top: 0px !important;
+        background-color: white;
+        z-index: 9999;
+    }
+
+    .fullscreen-editor .w-e-text-container {
+        width: 100% !important;
+        height: 95% !important;
+    }
+    .resumeEditor{
+        padding-left: -20px;
+        padding-right: -20px;
+    }
 </style>
+<script src="/assets/wangeditor/wangEditor-fullscreen-plugin.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://unpkg.com/wangeditor/release/wangEditor.min.js"></script>
 <div id="content-container" class="container">
     <div class="row">
         <div class="col-md-3">
@@ -127,7 +190,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-2">工种:</label>
                             <div class="col-xs-12 col-sm-4">
-                                <select class="form-control" style="width:100px;" id="profession" name="profession">
+                                <select class="form-control" style="" id="profession" name="profession">
                                     {volist name="profession" id="vo"}
                                     {if condition="$job_hunter['profession_id'] == $vo.id"}
                                     <option selected value="{$vo.id}">{$vo.name}</option>
@@ -141,7 +204,7 @@
                         <div class="form-group">
                             <label class="control-label col-xs-12 col-sm-2">工种等级:</label>
                             <div class="col-xs-12 col-sm-4">
-                                <select class="form-control" style="width:100px;" id="profession_level" name="profession_level">
+                                <select class="form-control" style="" id="profession_level" name="profession_level">
                                     {volist name="level" id="vo"}
                                         {if condition="$job_hunter['profession_level_id'] == $vo.id"}
                                             <option selected value="{$vo.id}">{$vo.name}</option>
@@ -152,13 +215,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="" style="">
                             <label class="control-label col-xs-12 col-sm-2">履历:</label>
-                            <div class="col-xs-12 col-sm-4">
-                                <textarea class="form-control editor" rows="8" name="resume">{$job_hunter.resume}</textarea>
-                            </div>
+                            <!--这才是真的输入框-->
+                            <textarea id="resumeTextarea" name="resume" style="width:100%; height:200px;display: none">{$job_hunter.resume}</textarea>
                         </div>
-
+                        <!--这个是编辑器-->
+                        <div class=" " id="resumeEditor"   name="resume">{$job_hunter.resume}</div>
                         <div class="form-group normal-footer">
                             <label class="control-label col-xs-12 col-sm-2"></label>
                             <div class="col-xs-12 col-sm-8">
@@ -166,6 +229,7 @@
                                 <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -241,29 +305,107 @@
         </div>
     </form>
 </script>
-<style>
-    .form-layer {height:100%;min-height:150px;min-width:300px;}
-    .form-body {
-        width:100%;
-        overflow:auto;
-        top:0;
-        position:absolute;
-        z-index:10;
-        bottom:50px;
-        padding:15px;
+<script>
+
+    function initEditor(){
+        //https://www.kancloud.cn/wangfupeng/wangeditor3/335777    参照
+        var E = window.wangEditor;
+        var editor= new E('#resumeEditor')
+        if (editor.textSelector===undefined){
+            console.error("编辑器初始化失败")
+        }else {
+            console.log("编辑器初始化成功")
+        }
+        console.log(console.memory)
+        //return false;
+
+        // 监控变化，同步更新到 textarea
+        var resumeTextarea = $('#resumeTextarea')
+        editor.customConfig.onchange = function (html) {
+            resumeTextarea.val(html)
+        }
+
+
+        editor.customConfig.uploadImgServer = '/api/common/uploadWangEditor'
+        // 限制一次最多上传 5 张图片
+        editor.customConfig.uploadImgMaxLength =1
+        //上传图片名
+        editor.customConfig.uploadFileName = 'file'
+        // 隐藏“网络图片”tab
+        editor.customConfig.showLinkImg = false
+        //editor.customConfig.uploadImgShowBase64 = true
+        //工具栏菜单
+        editor.customConfig.menus = [
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'foreColor',  // 文字颜色
+            'justify',  // 对齐方式
+            'image',  // 插入图片
+            'undo',  // 撤销
+            'redo'  // 重复
+
+            /*'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'quote',  // 引用
+            'emoticon',  // 表情
+            'image',  // 插入图片
+            'table',  // 表格
+            'video',  // 插入视频
+            'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+                        */
+
+        ]
+        editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0
+        //限制图片大小
+        editor.customConfig.uploadImgMaxSize = 512 * 1024
+        //自定义设置 header
+        editor.customConfig.uploadImgHeaders = {
+            'Accept': 'text/x-json'
+        };
+        //
+        editor.customConfig.uploadImgHooks = {
+
+            customInsert: function (insertImg, result, editor) {
+                // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）  |    insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+                // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+                if (result.error===0){
+                    var url = result.url
+                    insertImg(url)
+                }else{
+                    alert('图片上传失败')
+                }
+                /* console.log(result)
+                 console.log(insertImg)
+                 console.log(editor)*/
+                // result 必须是一个 JSON 格式字符串！！！否则报错
+            }
+        };
+        editor.create()
     }
-    .form-layer .form-footer {
-        height:50px;
-        line-height:50px;
-        background-color: #ecf0f1;
-        width:100%;
-        position:absolute;
-        z-index:200;
-        bottom:0;
-        margin:0;
+
+    function spreadSelecteInput(){
+        var inputWidth =$('#username').width()
+        $('select').width(inputWidth)
     }
-    .form-footer .form-group{
-        margin-left:0;
-        margin-right:0;
+
+
+
+
+
+    window.onload=function () {
+        initEditor();
+        spreadSelecteInput();
     }
-</style>
+</script>
