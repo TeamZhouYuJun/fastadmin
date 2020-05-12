@@ -35,28 +35,27 @@ class Index extends Frontend
      */
     public function index()
     {
-        $pageSize=5;
+        $pageSize=10;
         //搜索类型
         $search_type = $this->request->get('search_type');
         //搜索值
         $search_value = $this->request->get('search_value');
         if ($search_value){
-            $db = Db::table('fa_job_hunter j')
+            $search_value='%'.$search_value.'%';
+            $list = Db::table('fa_job_hunter j')
                 ->field('j.*')
                 ->field('p.name as profession')
                 ->field('u.avatar as avatar')
                 ->join('fa_profession p','p.id = j.profession_id','LEFT')
                 ->join('fa_profession_level pl','pl.id = j.profession_level_id','LEFT')
-                ->join('fa_user u','u.id = j.user_id','LEFT');
-            if ($search_type == 'profession'){ //根据工种查找
-                $db->where('p.name', 'like', '%'.$search_value.'%');
-            }elseif($search_type == 'profession_level'){ //根据工种等级查找
-                $db->where('pl.name', 'like', '%'.$search_value.'%');
-            }else{  //其他类型查找
-                $db->where('j.'.$search_type, 'like', '%'.$search_value.'%');
-            }
-            //分页查找
-            $list=$db-> paginate($pageSize,false,['query'=>request()->param()]);
+                ->join('fa_user u','u.id = j.user_id','LEFT')
+                ->whereOr('j.full_name',"like",$search_value)
+                ->whereOr('j.phone',"like",$search_value)
+                ->whereOr('p.name',"like",$search_value)
+                ->whereOr('pl.name',"like",$search_value)
+                ->whereOr('j.graduate_school',"like",$search_value)
+                ->paginate($pageSize,false,['query'=>request()->param()]);
+            //dump(Db::table('fa_job_hunter j')->getLastSql());die;
         }else{
             $list = Db::table('fa_job_hunter j')
                 ->field('j.*')

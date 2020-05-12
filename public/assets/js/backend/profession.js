@@ -8,6 +8,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     index_url: 'profession/index',
                     edit_url: 'profession/edit',
                     add_url: 'profession/add',
+                    del_url: 'profession/del',
                     table: 'profession',
                 }
             });

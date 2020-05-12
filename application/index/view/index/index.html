@@ -89,15 +89,8 @@
 </nav>
 <div style="height: 20px"><!--空行 支撑高度--></div>
 <div class="search" style="">
-    <div class="col-xs-8 no-padding">
+    <div class="col-xs-10 no-padding">
         <input type="text" placeholder="输入姓名、电话、工种、等级" class="height-34 input full-width" name="search_value" id="search_value" value="{:request()->get('search_value')}"/>
-    </div>
-    <div class="col-xs-2 no-padding" >
-        <select id="search_type" class="height-34 full-width" style="text-align: center">
-            {foreach $searchTypeArr as $k=> $vo}
-            <option value="{:$k}" {if condition="($Request.get.search_type == $k)" }selected {/if} >{:$vo} </option>
-            {/foreach}
-        </select>
     </div>
     <div class="col-xs-2 no-padding" >
         <button type="button" onclick="search()" id="search_btn" class="height-34 full-width btn-info" >搜 索</button>
@@ -147,18 +140,17 @@
 <script src="__CDN__/assets/layer/layer.js"></script>
 <script>
     function search() {
-        var search_type = document.getElementById("search_type").value;
         var search_value = document.getElementById("search_value").value;
         if (typeof (search_value) == "undefined" || search_value == '' || search_value == null) {
             //layer.msg("请输入搜索内容！");
-            window.location.href = '/?search_type=full_name&search_value';
+            window.location.href = '/';
             return false;
         }
         var url = window.location.href; //url路径
 
         var k = url.indexOf('?');//indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
         //地址拼接;
-        var goUrl = url.substring(0, k) + '?search_type=' + search_type + '&search_value=' + search_value;
+        var goUrl = url.substring(0, k) + '?search_value=' + search_value;
 
         //跳转路径
         window.location.href = goUrl;
